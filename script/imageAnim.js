@@ -1,19 +1,72 @@
 (() => {
-	console.log('fired');
+	// Variables always come first, functions go in the middle, 
+	// and event handling and invoking functions goes at the bottom
+	
+	// set up the puzzle pieces and boards
+	const pieces = ["topLeft", "topRight", "bottomLeft", "bottomRight"];
 
-	const theButton = document.querySelector("buttonHolder img");
+	let piecesBoard = document.querySelector(".puzzle-pieces"),
+		puzzleBoard = document.querySelector(".puzzle-board"),
+		puzzleSelectors = document.querySelectorAll("#buttonHolder img");
 
-	function changeHeadline() {
-		document.querySelector("h1").textContent = "Hey there from JS!" 
-		document.querySelector("p").textContent = "A fun game"
+	let dropZones = document.querySelectorAll('.drop-zone');
 
+	function createPuzzlePieces(pictureIndex) {
+		// Generate puzzle pieces for the left hand side
+		pieces.forEach((piece, index) => {
+			let newPuzzlePiece = `<img draggable id="piece${index}" class="puzzle-image" src="images/${piece + pictureIndex}.jpg" alt="thumbnail">`;
+
+			piecesBoard.innerHTML += newPuzzlePiece;
+		});
+
+		puzzleBoard.style.backgroundImage = `url(./images/backGround${pictureIndex}.jpg)`;
+
+		initDrag();
 	}
 
+	// Drag and drop functionality goes here
+	function initDrag() {
+		piecesBoard.querySelectorAll('img').forEach(img => {
+			img.addEventListener("dragstart", function(e) {
+				console.log('Draggin...');
 
-	// set up the puzzle pieces and boards
-	//
+				e.dataTransfer.setData("text/plain", this.id)
+		});
+	});
+	}
 
-	theButton.addEventListener("click", changeHeadline)
+	// Handle dragover and drop
+	dropZones.forEach(zone => {
+		zone.addEventListener("dragover", function(e) {
+		e.preventDefault();
+		console.log("You dragged over me!");
+		});
+		
+		zone.addEventListener("drop", function(e) {
+			e.preventDefault();
+			console.log("You dropped somethin on me!");
 
-	
+			let piece = e.dataTransfer.getData("text/plain");
+			e.target.appendChild(document.querySelector(`#${piece}`));
+		});
+	});
+
+	function resetPuzzlePieces() {
+		// Swap out all of the images when clicking on a bottom button
+		
+		// Empty the thumbnail container
+		piecesBoard.innerHTML = "click thumb to change pieces!"
+
+		/*if (".puzzle-pieces")
+
+		console.log("Try another one, Goodluck!")*/
+
+
+		createPuzzlePieces(this.dataset.puzzleref)
+	}
+
+	puzzleSelectors.forEach(puzzle => puzzle.addEventListener("click", resetPuzzlePieces));
+
+
+	createPuzzlePieces(0);
 })();
