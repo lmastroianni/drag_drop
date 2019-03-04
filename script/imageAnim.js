@@ -46,20 +46,31 @@
 			e.preventDefault();
 			console.log("You dropped somethin on me!");
 
+
 			let piece = e.dataTransfer.getData("text/plain");
 			e.target.appendChild(document.querySelector(`#${piece}`));
 		});
 	});
-
+// Swap out all of the images when clicking on a bottom button
 	function resetPuzzlePieces() {
-		// Swap out all of the images when clicking on a bottom button
 		
+		/*let ("puzzle-pieces") = node.remove".puzzle-pieces"
+		if   addEventListener("click") piecesBoard.innerHTML = "click thumb to change pieces!"
+		.forEach(img => { 
+			img.addEventListener("click"), function(e){
+				console.log("Puzzle reset, Try another one!")
+
+				return ".puzzle-pieces"*/
+
+			//My attempt to fix one of the bugs is stated above
+
+
+		
+
+
+
 		// Empty the thumbnail container
 		piecesBoard.innerHTML = "click thumb to change pieces!"
-
-		/*if (".puzzle-pieces")
-
-		console.log("Try another one, Goodluck!")*/
 
 
 		createPuzzlePieces(this.dataset.puzzleref)
