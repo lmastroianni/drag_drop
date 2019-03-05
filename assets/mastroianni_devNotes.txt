@@ -1,0 +1,26 @@
+Bug 1 
+
+ 1. Drag a piece onto 1 of the 4 available slots 
+ 2. Drop it 
+ 3. Drag another piece onto the same slot as the first 
+ 4. Drop it 
+ 5. Piece will reset to the ‘puzzle-pieces’ section (rather than disappearing)
+
+Solution: 
+
+To fix this, write an if statement that checks to see if the drop zone has a child. 
+If the drop zone already has a child (a puzzle piece), return false in the event listener for 
+dropping so that only one pieces is allowed in a single zone. In the HTML, the pieces can be targetted (0,1,2,and 3).
+"Return False" anything greater than zero fixes this bug.
+ 
+Bug 2
+ 1. Target the pieces on the board (JavaScript purposes)
+ 2. Click on a puzzle thumbnail other than the one you’re on 
+ 3. Once clicked, puzzle is reset
+ 4. Playing board is cleared
+ 5. Start a new puzzle 
+
+Solution:
+
+To fix this, remove all children (using removeChild) of the drop zone elements in the resetPuzzlePieces 
+function before calling the createPuzzlePieces function. Add an event listener "click" so that the reset can be activated.

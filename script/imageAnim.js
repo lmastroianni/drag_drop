@@ -45,34 +45,25 @@
 		zone.addEventListener("drop", function(e) {
 			e.preventDefault();
 			console.log("You dropped somethin on me!");
+        //prevents multiple pieces from being in same zone
+
+        if (zone.children.length > 0) {
+        	return false;
+        }
 
 
 			let piece = e.dataTransfer.getData("text/plain");
 			e.target.appendChild(document.querySelector(`#${piece}`));
 		});
 	});
-// Swap out all of the images when clicking on a bottom button
+    // Swap out all of the images when clicking on a bottom button
 	function resetPuzzlePieces() {
-		
-		/*let ("puzzle-pieces") = node.remove".puzzle-pieces"
-		if   addEventListener("click") piecesBoard.innerHTML = "click thumb to change pieces!"
-		.forEach(img => { 
-			img.addEventListener("click"), function(e){
-				console.log("Puzzle reset, Try another one!")
 
-				return ".puzzle-pieces"*/
-
-			//My attempt to fix one of the bugs is stated above
-
-
-		
-
-
-
-		// Empty the thumbnail container
-		piecesBoard.innerHTML = "click thumb to change pieces!"
-
-
+		dropZones.forEach(zone =>{
+			if (zone.children.length > 0){
+				zone.removeChild(zone.children[0])
+			}
+		});
 		createPuzzlePieces(this.dataset.puzzleref)
 	}
 
